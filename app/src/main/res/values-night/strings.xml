@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Udyog Jaal</string>
+    <string name="userName">User ID</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="don_t_have_an_account_signup_here">Don\'t have an account? SignUp Here</string>
+    <string name="name">Name</string>
+    <string name="signup">SignUp</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="job_provider">JOB PROVIDER</string>
+    <string name="job_seeker">JOB SEEKER</string>
+    <string name="guest">GUEST</string>
+    <string name="select_user_type">SELECT USER TYPE</string>
+    <string name="full_name">Full Name</string>
+    <string name="date_of_birth">Date Of Birth</string>
+    <string name="gender">Gender</string>
+    <string name="other">other</string>
+    <string name="female">female</string>
+    <string name="male">male</string>
+    <string name="languages_known">Languages Known</string>
+    <string name="hindi">Hindi</string>
+    <string name="english">English</string>
+    <string name="kannada">Kannada</string>
+    <string name="telgu">Telgu</string>
+    <string name="malyalam">Malyalam</string>
+    <string name="tamil">Tamil</string>
+    <string name="owner_name">Owner Name</string>
+    <string name="enterprise_name">Enterprise Name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="field">Field</string>
+    <string name="part_time">Part Time</string>
+    <string name="full_time">Full Time</string>
+    <string name="permanent">Permanent</string>
+    <string name="temporary">Temporary</string>
+    <string name="contract">Contract</string>
+    <string name="salary">Monthly Salary</string>
+    <string name="requirements">Requirements</string>
+    <string name="driving">Driving two wheeler vehicle</string>
+    <string name="post_name">Available Post</string>
+    <string name="job_category">Job Category</string>
+    <string name="manager_name">Manger Name</string>
+    <string name="contact_number">Contact Number</string>
+    <string-array name="customer_type">
+        <item>Select Profile</item>
+        <item>Job Seeker</item>
+        <item>Job Provider</item>
+        <item>Guest</item>
+    </string-array>
+</resources>

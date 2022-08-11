@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "38975067590",
+    "project_id": "udyog-jaal",
+    "storage_bucket": "udyog-jaal.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:38975067590:android:7d17000343b8aab7508ec7",
+        "android_client_info": {
+          "package_name": "com.example.udyogjaal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "38975067590-plbcn4hqot1mggbrsiscg8h8qoerr7qq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJdDQ-8pn-Pfmb7nDTMPhdl-OVN3Boyzg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "38975067590-plbcn4hqot1mggbrsiscg8h8qoerr7qq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
