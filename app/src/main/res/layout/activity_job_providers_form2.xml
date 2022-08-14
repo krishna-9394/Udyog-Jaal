@@ -119,7 +119,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.16" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-            <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/email_input_layout"
+            <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/salary_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp">
@@ -271,38 +271,29 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <CheckBox android:text="@string/hindi"
+                    <CheckBox android:text="using the goole map"
                         android:layout_marginStart="20dp"
                         android:id="@+id/checkBox"
-                        android:layout_width="80dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         />
                     <CheckBox  android:text="@string/billing"
                         android:layout_marginStart="20dp"
                         android:id="@+id/checkBox2"
-                        android:layout_width="105dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         />
                     <CheckBox android:text="@string/driving"
                         android:layout_marginStart="20dp"
                         android:id="@+id/checkBox3"
-                        android:layout_width="100dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
-                    <CheckBox android:text="@string/telgu"
+                    <CheckBox android:text="good knowledge about locality"
                         android:layout_marginStart="20dp"
                         android:id="@+id/checkBox4"
-                        android:layout_width="80dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
-                    <CheckBox android:text="@string/malyalam"
-                        android:layout_marginStart="20dp"
-                        android:id="@+id/checkBox5"
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"/>
-                    <CheckBox android:text="@string/tamil"
-                        android:layout_marginStart="20dp"
-                        android:id="@+id/checkBox6"
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content" />
+
 
                 </LinearLayout>
 

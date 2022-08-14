@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -19,6 +20,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -28,8 +30,10 @@ import android.widget.Toast;
 import com.example.udyogjaal.R;
 import com.example.udyogjaal.utilities.Constants;
 import com.example.udyogjaal.utilities.PreferenceManager;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
@@ -66,7 +70,6 @@ public class SignUp_Page extends AppCompatActivity {
     private FirebaseFirestore loginDB;
     private FirebaseStorage storage;
     private StorageReference ref;
-
     private PreferenceManager preferenceManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +95,6 @@ public class SignUp_Page extends AppCompatActivity {
         progressBar = findViewById(R.id.progress_bar);
         addImage = (FloatingActionButton) findViewById(R.id.add_image);
         userProfile = (RoundedImageView) findViewById(R.id.signUp_logo);
-        path = "images/" + UUID.randomUUID().toString();
         Log.v("message","initialization completed");
 
     }
@@ -102,7 +104,6 @@ public class SignUp_Page extends AppCompatActivity {
     }
     // Set the Listeners such as forgotPassword, SignUp, and addImage;
     private void Listener() {
-
         loginHyperLink.setOnClickListener(view -> { startActivity(new Intent(SignUp_Page.this, SignIn_Page.class)); });  //checked once
         SignUp.setOnClickListener(view -> { if(validateCredentials()) SignUp(); });
         addImage.setOnClickListener(view -> { chooseImage(); });
@@ -117,25 +118,22 @@ public class SignUp_Page extends AppCompatActivity {
                     @Override
                     public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
                         // after getting the permission choosing image part 1
-
                         Intent intent = new Intent();
                         intent.setType("image/*");
                         intent.setAction(Intent.ACTION_GET_CONTENT);
-                        startActivityForResult(intent, 101);
+                        startActivityForResult(intent,101);
                     }
-
                     @Override
                     public void onPermissionDenied(PermissionDeniedResponse permissionDeniedResponse) {
                         Toast.makeText(SignUp_Page.this, "permission denied..", Toast.LENGTH_SHORT).show();
                     }
-
                     @Override
                     public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
                         permissionToken.continuePermissionRequest();
                     }
                 }).check();
     }
-    // intergral part of choosing
+    // integral part of choosing
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 101 && resultCode == RESULT_OK){
@@ -151,50 +149,28 @@ public class SignUp_Page extends AppCompatActivity {
             ProgressDialog progressDialog = new ProgressDialog(this);
             progressDialog.setTitle("Uploading...");
             progressDialog.show();
+            path = System.currentTimeMillis()+"."+getFileExtension(imageUri);
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 60 , stream);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 25 , stream);
                 imageByte = stream.toByteArray();
-                 ref = storage.getReference().child(path);
+                ref = storage.getReference().child("images/").child(path);
                 // adding listeners on upload
                 // or failure of image
-                ref.putBytes(imageByte)
-                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+
+                ref.putFile(imageUri)
+                        .addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                             @Override
-                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                                 ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                     @Override
                                     public void onSuccess(Uri uri) {
-                                        try {
-                                            Bitmap bit = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                                        } catch (IOException e) {
-                                            e.printStackTrace();
-                                        }
+                                        String url = uri.toString();
+                                        preferenceManager.putString(Constants.KEY_IMAGE_URL,url);
+                                        progressDialog.dismiss();
                                     }
                                 });
-                                // Image uploaded successfully
-                                // Dismiss dialog
-                                progressDialog.dismiss();
-                                showToast("uploaded...");
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-
-                                // Error, Image not uploaded
-                                progressDialog.dismiss();
-                                showToast(" " + "Failed " + e.getMessage());
-                            }
-                        })
-                        .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                            // Progress Listener for loading
-                            // percentage on the dialog box
-                            @Override
-                            public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
-                                double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                                progressDialog.setMessage("Uploaded " + (int) progress + "%");
                             }
                         });
             } catch (IOException e) {
@@ -202,6 +178,13 @@ public class SignUp_Page extends AppCompatActivity {
             }
         }
     }
+
+    private String getFileExtension(Uri iUri) {
+        ContentResolver content = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(content.getType(iUri));
+    }
+
     //consisting of uploading of image firebase storage and uploading it to preference manager
     private void SignUp() {
         loading(true);
@@ -221,7 +204,6 @@ public class SignUp_Page extends AppCompatActivity {
                             preferenceManager.putString(Constants.KEY_NAME, name.getText().toString());
                             preferenceManager.putString(Constants.KEY_IMAGE, path);
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                            intent.putExtra("profile", imageByte);
                             startActivity(intent);
                         }
                     })

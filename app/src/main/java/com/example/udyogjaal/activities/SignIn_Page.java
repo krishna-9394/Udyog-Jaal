@@ -7,12 +7,14 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.provider.Telephony;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,10 +35,11 @@ import com.google.firebase.storage.StorageReference;
 public class SignIn_Page extends AppCompatActivity {
 
     private EditText email,password;
+    private ImageView signinlog;
     private TextView signupHyperLink,forgotPasswordHyperLink;
     private Button login;
     private ProgressBar progressBar;
-    private byte[] imageByte;
+    byte[] imageByte;
     private PreferenceManager preferenceManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,38 +48,26 @@ public class SignIn_Page extends AppCompatActivity {
         // checking out weather the person has already signed in or not? using preferences manager
         preferenceManager = new PreferenceManager(getApplicationContext());
         if(preferenceManager.getBoolean(Constants.KEY_IS_SIGNED_IN)){
-            StorageReference mImageRef = FirebaseStorage.getInstance().getReference(preferenceManager.getString(Constants.KEY_IMAGE));
-            final long ONE_MEGABYTE = 1024 * 1024;
-            mImageRef.getBytes(ONE_MEGABYTE)
-                    .addOnSuccessListener(new OnSuccessListener<byte[]>() {
-                        @Override
-                        public void onSuccess(byte[] bytes) {
-                            imageByte = bytes;
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception exception) {
-                            // Handle any errors
-                        }
-                    });
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            intent.putExtra("profile", imageByte);
+            Intent intent = new Intent(SignIn_Page.this, MainActivity.class);
             startActivity(intent);
             finish();
         }
         setContentView(R.layout.activity_sign_in_page);
-
         // initialising the view Items
+        initialization();
+        //various operations list
+        setListeners();
+    }
+
+    private void initialization() {
         email = findViewById(R.id.email_input);
         password = findViewById(R.id.password_input);
         signupHyperLink = findViewById(R.id.signUp_option);
         forgotPasswordHyperLink = findViewById(R.id.forgot_password_option);
         login = findViewById(R.id.Sign_in_button);
         progressBar = findViewById(R.id.progress_bar);
-
-        //various operations list
-        setListeners();
     }
+
     private void setListeners() {
         login.setOnClickListener(view -> {
             if (validateCredentials()) Login();
@@ -104,22 +95,7 @@ public class SignIn_Page extends AppCompatActivity {
                             preferenceManager.putString(Constants.KEY_NAME,documentSnapshot.getString(Constants.KEY_NAME));
                             preferenceManager.putString(Constants.KEY_IMAGE,documentSnapshot.getString(Constants.KEY_IMAGE));
                             // retrieving the image and passing it to the other activity using intent
-                            StorageReference mImageRef = FirebaseStorage.getInstance().getReference(preferenceManager.getString(Constants.KEY_IMAGE));
-                            final long ONE_MEGABYTE = 1024 * 1024;
-                            mImageRef.getBytes(ONE_MEGABYTE)
-                                    .addOnSuccessListener(new OnSuccessListener<byte[]>() {
-                                        @Override
-                                        public void onSuccess(byte[] bytes) {
-                                            imageByte = bytes;
-                                        }
-                                    }).addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception exception) {
-                                            // Handle any errors
-                                        }
-                                    });
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                            intent.putExtra("profile", imageByte);
                             startActivity(intent);
                         }
                         else{
