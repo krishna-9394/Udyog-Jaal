@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView name;
     private ConstraintLayout seeker, provider, guest;
     private PreferenceManager preferenceManager;
+    private FirebaseStorage storage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,28 +55,27 @@ public class MainActivity extends AppCompatActivity {
         back = findViewById(R.id.imageBack);
         name = findViewById(R.id.nameView);
     }
-
     private void loadingUserDetails() {
         name.setText(preferenceManager.getString(Constants.KEY_NAME));
-        FirebaseStorage storage = FirebaseStorage.getInstance();
+        storage = FirebaseStorage.getInstance();
         StorageReference mImageRef = storage.getReference();
-//        Glide.with(this /* context */)
-//                .load(mImageRef)
-//                .into(profile);
-        mImageRef.child("images/").child(Constants.KEY_IMAGE).getDownloadUrl()
-                .addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        profile.setImageURI(uri);
-                        Toast.makeText(MainActivity.this, "loaded..", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(MainActivity.this, "Failed..", Toast.LENGTH_SHORT).show();
-                    }
-                });
+        Log.v( "picturing", ""+preferenceManager.getString(Constants.KEY_IMAGE_URL));
+        Glide.with(MainActivity.this).load(preferenceManager.getString(Constants.KEY_IMAGE_URL)).into(profile);
+
+//        mImageRef.child("images/").child(Constants.KEY_IMAGE).getDownloadUrl()
+//                .addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                    @Override
+//                    public void onSuccess(Uri uri) {
+//                        profile.setImageURI(uri);
+//                        Toast.makeText(MainActivity.this, "loaded..", Toast.LENGTH_SHORT).show();
+//                    }
+//                })
+//                .addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Toast.makeText(MainActivity.this, "Failed..", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
 //        final long ONE_MEGABYTE = 1024 * 1024;
 //        mImageRef.getBytes(ONE_MEGABYTE)
 //                .addOnSuccessListener(new OnSuccessListener<byte[]>() {

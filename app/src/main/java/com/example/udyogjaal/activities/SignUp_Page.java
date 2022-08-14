@@ -1,8 +1,5 @@
 package com.example.udyogjaal.activities;
 
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,7 +9,6 @@ import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -30,14 +26,12 @@ import android.widget.Toast;
 import com.example.udyogjaal.R;
 import com.example.udyogjaal.utilities.Constants;
 import com.example.udyogjaal.utilities.PreferenceManager;
-import com.google.android.gms.tasks.OnCompleteListener;
+import com.example.udyogjaal.utilities.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -53,7 +47,6 @@ import com.makeramen.roundedimageview.RoundedImageView;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.UUID;
 
 public class SignUp_Page extends AppCompatActivity {
     private EditText name,email,password,confirmPassword;
@@ -64,10 +57,10 @@ public class SignUp_Page extends AppCompatActivity {
     private RoundedImageView userProfile;
 
     private Uri imageUri;
-    private String path;
+    private String url;
     private byte[] imageByte;
 
-    private FirebaseFirestore loginDB;
+    private FirebaseDatabase loginDB;
     private FirebaseStorage storage;
     private StorageReference ref;
     private PreferenceManager preferenceManager;
@@ -77,7 +70,7 @@ public class SignUp_Page extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up_page);
         preferenceManager=new PreferenceManager(getApplicationContext());
 
-        loginDB = FirebaseFirestore.getInstance();
+        loginDB = FirebaseDatabase.getInstance();
         storage = FirebaseStorage.getInstance();
 
         // initialising the view Items
@@ -97,24 +90,20 @@ public class SignUp_Page extends AppCompatActivity {
         userProfile = (RoundedImageView) findViewById(R.id.signUp_logo);
         Log.v("message","initialization completed");
 
-    }
-    // Toast message maker
+    }  // initialization the views
     public void showToast(String message){
         Toast.makeText(this, ""+message, Toast.LENGTH_SHORT).show();
-    }
-    // Set the Listeners such as forgotPassword, SignUp, and addImage;
+    }  // toast message creator
     private void Listener() {
         loginHyperLink.setOnClickListener(view -> { startActivity(new Intent(SignUp_Page.this, SignIn_Page.class)); });  //checked once
         SignUp.setOnClickListener(view -> { if(validateCredentials()) SignUp(); });
         addImage.setOnClickListener(view -> { chooseImage(); });
-    }
-
+    }    // setting the listener such as loginOption, submit button ,and choosing the image
     private void chooseImage() {
         //  taking permission for storage
         Dexter.withContext(this)
                 .withPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
                 .withListener(new PermissionListener(){
-
                     @Override
                     public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
                         // after getting the permission choosing image part 1
@@ -132,8 +121,7 @@ public class SignUp_Page extends AppCompatActivity {
                         permissionToken.continuePermissionRequest();
                     }
                 }).check();
-    }
-    // integral part of choosing
+    }   // Choosing the image part 1
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 101 && resultCode == RESULT_OK){
@@ -141,15 +129,14 @@ public class SignUp_Page extends AppCompatActivity {
             userProfile.setImageURI(imageUri);
             upload();
         }
-    }
-
+    }   // integral part of choosing
     private void upload() {
         if (imageUri != null) {
             // Code for showing progressDialog while uploading
             ProgressDialog progressDialog = new ProgressDialog(this);
             progressDialog.setTitle("Uploading...");
             progressDialog.show();
-            path = System.currentTimeMillis()+"."+getFileExtension(imageUri);
+            String path = System.currentTimeMillis()+"."+getFileExtension(imageUri);
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -159,61 +146,66 @@ public class SignUp_Page extends AppCompatActivity {
                 // adding listeners on upload
                 // or failure of image
 
-                ref.putFile(imageUri)
-                        .addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                ref.putBytes(imageByte)
+                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                             @Override
-                            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                 ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                     @Override
                                     public void onSuccess(Uri uri) {
-                                        String url = uri.toString();
+                                        url = uri.toString();
                                         preferenceManager.putString(Constants.KEY_IMAGE_URL,url);
+                                        Log.v("message", url);
                                         progressDialog.dismiss();
                                     }
                                 });
                             }
-                        });
+                        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                                progressBar.setVisibility(View.VISIBLE);
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                progressBar.setVisibility(View.INVISIBLE);
+                                showToast("Uploading Failed !!");
+                            }
+                        });;
             } catch (IOException e) {
+                Log.v("message","compressing failed...");
                 e.printStackTrace();
             }
         }
-    }
-
+    }  // uploading the images to the firebase Storage
     private String getFileExtension(Uri iUri) {
         ContentResolver content = getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(content.getType(iUri));
-    }
-
-    //consisting of uploading of image firebase storage and uploading it to preference manager
+    }  //function to get the file extensions
     private void SignUp() {
         loading(true);
-        HashMap<String,Object> map = new HashMap<>();
-        map.put(Constants.KEY_NAME,name.getText().toString().trim());
-        map.put(Constants.KEY_EMAIL,email.getText().toString().trim());
-        map.put(Constants.KEY_PASSWORD,password.getText().toString().trim());
-        map.put(Constants.KEY_IMAGE, path);
-        loginDB.collection(Constants.KEY_USER_COLLECTION).add(map)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                        @Override
-                        public void onSuccess(DocumentReference documentReference) {
-                            loading(false);
+        User user = new User(name.getText().toString().trim(), url, email.getText().toString().trim(), password.getText().toString().trim());
+        DatabaseReference def = loginDB.getReference();
+        def.child("users").push().setValue(user)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        loading(false);
                             // adding data to permanent memory after the login
                             preferenceManager.putBoolean(Constants.KEY_IS_SIGNED_IN, true);
-                            preferenceManager.putString(Constants.KEY_USER_ID, documentReference.getId());
                             preferenceManager.putString(Constants.KEY_NAME, name.getText().toString());
-                            preferenceManager.putString(Constants.KEY_IMAGE, path);
-                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                            startActivity(intent);
-                        }
-                    })
+                            preferenceManager.putString(Constants.KEY_IMAGE_URL, url);
+                            Intent intent = new Intent(SignUp_Page.this, MainActivity.class);
+                    }
+                })
                 .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             showToast(e.getMessage());
                         }
                     });
-    }
+    }  //consisting of uploading of image firebase storage and uploading it to preference manager
     private void loading(boolean isLoading) {
         if(isLoading) {
             progressBar.setVisibility(View.VISIBLE);
@@ -222,8 +214,7 @@ public class SignUp_Page extends AppCompatActivity {
             progressBar.setVisibility(View.INVISIBLE);
             SignUp.setVisibility(View.VISIBLE);
         }
-    }
-    // validating Login credentials
+    }  // loading related action work
     private boolean validateCredentials() {
         if(TextUtils.isEmpty(email.getText().toString())) {
             email.setError("email is required");
@@ -249,5 +240,5 @@ public class SignUp_Page extends AppCompatActivity {
             return false;
         }
         else return true;
-    }
+    }  // validating Login credentials
 }
