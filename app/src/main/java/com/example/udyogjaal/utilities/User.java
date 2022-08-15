@@ -1,16 +1,28 @@
 package com.example.udyogjaal.utilities;
 
 public class User {
-    private String name, image_url, email, password;
-
+    private String name;
+    private String image_url;
+    private String email;
+    private String password;
     public User() {
     }
 
-    public User(String name, String image_url, String email, String password) {
+    public User( String email, String image_url, String name, String password) {
         this.name = name;
         this.image_url = image_url;
         this.email = email;
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", image_url='" + image_url + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 
     public String getName() {

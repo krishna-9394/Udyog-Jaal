@@ -61,40 +61,6 @@ public class MainActivity extends AppCompatActivity {
         StorageReference mImageRef = storage.getReference();
         Log.v( "picturing", ""+preferenceManager.getString(Constants.KEY_IMAGE_URL));
         Glide.with(MainActivity.this).load(preferenceManager.getString(Constants.KEY_IMAGE_URL)).into(profile);
-
-//        mImageRef.child("images/").child(Constants.KEY_IMAGE).getDownloadUrl()
-//                .addOnSuccessListener(new OnSuccessListener<Uri>() {
-//                    @Override
-//                    public void onSuccess(Uri uri) {
-//                        profile.setImageURI(uri);
-//                        Toast.makeText(MainActivity.this, "loaded..", Toast.LENGTH_SHORT).show();
-//                    }
-//                })
-//                .addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        Toast.makeText(MainActivity.this, "Failed..", Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-//        final long ONE_MEGABYTE = 1024 * 1024;
-//        mImageRef.getBytes(ONE_MEGABYTE)
-//                .addOnSuccessListener(new OnSuccessListener<byte[]>() {
-//                    @Override
-//                    public void onSuccess(byte[] bytes) {
-//                        Bitmap bm = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-//                        DisplayMetrics dm = new DisplayMetrics();
-//                        getWindowManager().getDefaultDisplay().getMetrics(dm);
-//                        profile.setMinimumHeight(dm.heightPixels);
-//                        profile.setMinimumWidth(dm.widthPixels);
-//                        profile.setImageBitmap(bm);
-//                    }
-//                })
-//                .addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception exception) {
-//                        // Handle any errors
-//                    }
-//                });
     }
     public void showToast(String message){
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();

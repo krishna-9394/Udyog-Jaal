@@ -46,7 +46,6 @@ import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.HashMap;
 
 public class SignUp_Page extends AppCompatActivity {
     private EditText name,email,password,confirmPassword;
@@ -80,8 +79,8 @@ public class SignUp_Page extends AppCompatActivity {
 
     private void initializing() {
         name = findViewById(R.id.name_input);
-        email = findViewById(R.id.email_input);
-        password = findViewById(R.id.password_input);
+        email = findViewById(R.id.sign_up_email_input);
+        password = findViewById(R.id.sign_up_password_input);
         confirmPassword = findViewById(R.id.confirm_password_input);
         loginHyperLink = findViewById(R.id.login_option);
         SignUp = findViewById(R.id.Sign_up_button);
@@ -127,6 +126,7 @@ public class SignUp_Page extends AppCompatActivity {
         if(requestCode == 101 && resultCode == RESULT_OK){
             imageUri = data.getData();
             userProfile.setImageURI(imageUri);
+            addImage.setVisibility(View.GONE);
             upload();
         }
     }   // integral part of choosing
@@ -157,12 +157,15 @@ public class SignUp_Page extends AppCompatActivity {
                                         preferenceManager.putString(Constants.KEY_IMAGE_URL,url);
                                         Log.v("message", url);
                                         progressDialog.dismiss();
+
                                     }
                                 });
                             }
                         }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                             @Override
                             public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                                double progress = (100.0 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
+                                progressDialog.setMessage("Uploaded " + (int) progress + "%");
                                 progressBar.setVisibility(View.VISIBLE);
                             }
                         }).addOnFailureListener(new OnFailureListener() {
@@ -185,7 +188,7 @@ public class SignUp_Page extends AppCompatActivity {
     }  //function to get the file extensions
     private void SignUp() {
         loading(true);
-        User user = new User(name.getText().toString().trim(), url, email.getText().toString().trim(), password.getText().toString().trim());
+        User user = new User(email.getText().toString().trim(), url, name.getText().toString().trim(), password.getText().toString().trim());
         DatabaseReference def = loginDB.getReference();
         def.child("users").push().setValue(user)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -197,6 +200,7 @@ public class SignUp_Page extends AppCompatActivity {
                             preferenceManager.putString(Constants.KEY_NAME, name.getText().toString());
                             preferenceManager.putString(Constants.KEY_IMAGE_URL, url);
                             Intent intent = new Intent(SignUp_Page.this, MainActivity.class);
+                            startActivity(intent);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

@@ -4,17 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.provider.Telephony;
 import android.text.TextUtils;
-import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,22 +19,11 @@ import com.example.udyogjaal.R;
 import com.example.udyogjaal.utilities.Constants;
 import com.example.udyogjaal.utilities.PreferenceManager;
 import com.example.udyogjaal.utilities.User;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-
-import java.util.HashMap;
 
 public class SignIn_Page extends AppCompatActivity {
 
@@ -63,8 +48,8 @@ public class SignIn_Page extends AppCompatActivity {
         setListeners(); //various operations list
     }
     private void initialization() {
-        email = findViewById(R.id.email_input);
-        password = findViewById(R.id.password_input);
+        email = findViewById(R.id.sign_in_email_input);
+        password = findViewById(R.id.sign_in_password_input);
         signupHyperLink = findViewById(R.id.signUp_option);
         forgotPasswordHyperLink = findViewById(R.id.forgot_password_option);
         login = findViewById(R.id.Sign_in_button);
@@ -88,33 +73,33 @@ public class SignIn_Page extends AppCompatActivity {
         ref.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(snapshot.exists()){
                             boolean is_matching = false;
                             for(DataSnapshot snap : snapshot.getChildren()){
-                                is_matching = true;
-                                User user = snapshot.getValue(User.class);
-                                if(user.getEmail().equals(email.getText().toString().trim()) &&
-                                        user.getPassword().equals(password.getText().toString().trim())){
+                                User user = snap.getValue(User.class);
+                                Log.v("logging", user.toString());
+                                String email_string = email.getText().toString();
+                                String password_string = password.getText().toString();
+                                if(user.getEmail().equals(email_string) && user.getPassword().equals(password_string)){
+                                    is_matching = true;
                                     preferenceManager.putBoolean(Constants.KEY_IS_SIGNED_IN,true);
                                     preferenceManager.putString(Constants.KEY_NAME, user.getName());
-                                    preferenceManager.putString(Constants.KEY_IMAGE, user.getImage_url());
+                                    preferenceManager.putString(Constants.KEY_IMAGE_URL, user.getImage_url());
 
                                     // retrieving the image and passing it to the other activity using intent
                                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                     startActivity(intent);
                                     break;
                                 }
-                            }
-                            if(!is_matching) {
-                                showToast("invalid credentials...");
-                                loading(false);
-                                showToast("unable to load...");
-                            }
+                                if(!is_matching) {
+                                    showToast("invalid credentials...");
+                                    loading(false);
+                                }
                         }
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
+                        showToast("Database error : " + error);
                     }
                 });
         loading(false);
@@ -148,5 +133,5 @@ public class SignIn_Page extends AppCompatActivity {
     } // validating Login credentials
     private void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-    }
+    }  //showing the toast message
 }
