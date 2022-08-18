@@ -34,13 +34,20 @@ public class JobSeekersForm1 extends AppCompatActivity {
         initializing();
 
         RadioGroup rg = (RadioGroup) findViewById(R.id.gender_radio);
-        final String value =
-                ((RadioButton)findViewById(rg.getCheckedRadioButtonId()))
-                        .getText().toString();
-
-        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                Toast.makeText(getBaseContext(), value, Toast.LENGTH_SHORT).show();
+                switch(checkedId){
+                    case R.id.radioButton:
+                        // do operations specific to this selection
+                        break;
+                    case R.id.radioButton2:
+                        // do operations specific to this selection
+                        break;
+                    case R.id.radioButton3:
+                        // do operations specific to this selection
+                        break;
+                }
             }
         });
     }
