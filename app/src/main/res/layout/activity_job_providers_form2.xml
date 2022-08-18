@@ -39,7 +39,7 @@
                 android:layout_marginTop="0dp">
 
                 <EditText
-                    android:id="@+id/manger_name_input"
+                    android:id="@+id/manager_name_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
@@ -119,56 +119,13 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.16" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-            <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/salary_input_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp">
-
-                <EditText android:id="@+id/salary_input"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="30dp"
-                    android:layout_marginBottom="20dp"
-                    android:autofillHints=""
-                    android:background="@drawable/edit_view_background"
-                    android:inputType="number"
-                    android:minHeight="48dp"
-                    android:paddingStart="15dp"
-                    android:paddingTop="8dp"
-                    android:paddingEnd="15dp"
-                    android:paddingBottom="8dp"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0"
-                    tools:ignore="SpeakableTextPresentCheck" />
-                <TextView android:id="@+id/salary_tag"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="40dp"
-                    android:background="@drawable/input_tag_background"
-                    android:paddingStart="5dp"
-                    android:textStyle="bold"
-                    android:paddingEnd="5dp"
-                    android:text="@string/salary"
-                    android:textColor="@color/black"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.16" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-            <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/job_category_input_layout"
+            <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/address_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp">
 
                 <EditText
-                    android:id="@+id/job_category_input"
+                    android:id="@+id/address_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
@@ -177,7 +134,7 @@
                     android:layout_marginBottom="20dp"
                     android:autofillHints=""
                     android:background="@drawable/edit_view_background"
-                    android:inputType="textPersonName"
+                    android:inputType="textPostalAddress"
                     android:minHeight="48dp"
                     android:paddingStart="15dp"
                     android:paddingTop="8dp"
@@ -191,7 +148,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0"
                     tools:ignore="SpeakableTextPresentCheck" />
-                <TextView android:id="@+id/job_category_tag"
+                <TextView android:id="@+id/address_input_tag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="40dp"
@@ -199,20 +156,20 @@
                     android:paddingStart="5dp"
                     android:paddingEnd="5dp"
                     android:textStyle="bold"
-                    android:text="@string/job_category"
+                    android:text="@string/address"
                     android:textColor="@color/black"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.16" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-            <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/available_post_input_layout"
+            <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/state_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp">
 
                 <EditText
-                    android:id="@+id/available_post_input"
+                    android:id="@+id/state_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
@@ -221,7 +178,7 @@
                     android:layout_marginBottom="20dp"
                     android:autofillHints=""
                     android:background="@drawable/edit_view_background"
-                    android:inputType="textPersonName"
+                    android:inputType="textPostalAddress"
                     android:minHeight="48dp"
                     android:paddingStart="15dp"
                     android:paddingTop="8dp"
@@ -235,7 +192,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0"
                     tools:ignore="SpeakableTextPresentCheck" />
-                <TextView android:id="@+id/available_post_tag"
+                <TextView android:id="@+id/state_input_tag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="40dp"
@@ -243,82 +200,20 @@
                     android:paddingStart="5dp"
                     android:paddingEnd="5dp"
                     android:textStyle="bold"
-                    android:text="@string/post_name"
+                    android:text="@string/state"
                     android:textColor="@color/black"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.16" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-            <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/requirement_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="30dp"
-                    android:layout_marginBottom="20dp"
-                    android:orientation="vertical"
-                    android:autofillHints=""
-                    android:background="@drawable/edit_view_background"
-                    android:padding="10dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <CheckBox android:text="using the goole map"
-                        android:layout_marginStart="20dp"
-                        android:id="@+id/checkBox"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        />
-                    <CheckBox  android:text="@string/billing"
-                        android:layout_marginStart="20dp"
-                        android:id="@+id/checkBox2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        />
-                    <CheckBox android:text="@string/driving"
-                        android:layout_marginStart="20dp"
-                        android:id="@+id/checkBox3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                    <CheckBox android:text="good knowledge about locality"
-                        android:layout_marginStart="20dp"
-                        android:id="@+id/checkBox4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-
-
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/requirement_tag"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="44dp"
-                    android:background="@drawable/input_tag_background"
-                    android:paddingStart="5dp"
-                    android:paddingEnd="5dp"
-                    android:textStyle="bold"
-                    android:text="@string/requirements"
-                    android:textColor="@color/black"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginTop="10dp"/>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-            <androidx.appcompat.widget.AppCompatButton android:id="@+id/button"
+            <androidx.appcompat.widget.AppCompatButton android:id="@+id/submit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:background="@drawable/button_background"
                 android:backgroundTint="#C302AFFD"
-                android:text="Proceed" />
+                android:text="@string/submit" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

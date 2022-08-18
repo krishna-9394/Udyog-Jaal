@@ -393,6 +393,17 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/billing" />
+                    <CheckBox android:id="@+id/map"
+                        android:text="@string/using_google_map"
+                        android:layout_marginStart="15dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        />
+                    <CheckBox android:id="@+id/locality"
+                        android:text="@string/good_knowledge_about_locality"
+                        android:layout_marginStart="15dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 

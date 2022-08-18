@@ -13,5 +13,8 @@ public class Constants {
     public static final String KEY_USER_TYPE = "usertype";
     public static final String KEY_IMAGE = "userimage";
     public static final String KEY_IMAGE_URL = "imageurl";
-    public static final String KEY_IS_PROVIDER1_DONE = "provider";
+    public static final String KEY_IS_PROVIDER1_DONE = "provider1";
+    public static final String KEY_IS_PROVIDER2_DONE = "provider2";
+    public static final String KEY_IS_SEEKER1_DONE = "seeker1";
+    public static final String KEY_IS_SEEKER2_DONE = "seeker2";
 }

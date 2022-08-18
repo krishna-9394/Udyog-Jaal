@@ -78,4 +78,8 @@
     <string name="driving2">Two Wheeler Driving</string>
     <string name="driving4">Four Wheeler Driving</string>
     <string name="skills">Skills</string>
+    <string name="using_google_map">Using Google map</string>
+    <string name="good_knowledge_about_locality">Good knowledge about Locality</string>
+    <string name="state">State</string>
+    <string name="submit">Submit</string>
 </resources>

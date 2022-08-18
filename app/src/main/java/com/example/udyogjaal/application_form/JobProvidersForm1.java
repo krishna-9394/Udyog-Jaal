@@ -33,22 +33,22 @@ public class JobProvidersForm1 extends AppCompatActivity {
     ArrayList<Boolean> job_category_status = new ArrayList<Boolean>(3);
     ArrayList<Integer> languages_known_name = new ArrayList<Integer>(6);
     ArrayList<Boolean> languages_known_status = new ArrayList<Boolean>(6);
-    ArrayList<Integer> skills_name = new ArrayList<Integer>(3);
-    ArrayList<Boolean> skills_status = new ArrayList<Boolean>(3);
+    ArrayList<Integer> skills_name = new ArrayList<Integer>(5);
+    ArrayList<Boolean> skills_status = new ArrayList<Boolean>(5);
 
     private FirebaseDatabase providerDB;
-    private FirebaseStorage storage;
-    private StorageReference ref;
     private PreferenceManager preferenceManager;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_job_providers_form1);
         preferenceManager=new PreferenceManager(getApplicationContext());
         providerDB = FirebaseDatabase.getInstance();
-        storage = FirebaseStorage.getInstance();
+        super.onCreate(savedInstanceState);
+        if(preferenceManager.getBoolean(Constants.KEY_IS_PROVIDER1_DONE)){
+            startActivity(new Intent(JobProvidersForm1.this, JobProvidersForm2.class));
+        }
+        setContentView(R.layout.activity_job_providers_form1);
         initializing();
         proceed.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,7 +59,6 @@ public class JobProvidersForm1 extends AppCompatActivity {
             }
         });
     }
-
     public void checkBoxStatus() {
         // setting up the status for field status 0-7
         final CheckBox electrical =   (CheckBox)findViewById(R.id.electrical);
@@ -100,14 +99,16 @@ public class JobProvidersForm1 extends AppCompatActivity {
         final CheckBox driving2 =   (CheckBox)findViewById(R.id.driving2);
         final CheckBox driving4 =   (CheckBox)findViewById(R.id.driving4);
         final CheckBox billing =   (CheckBox)findViewById(R.id.billing);
+        final CheckBox map =   (CheckBox)findViewById(R.id.map);
+        final CheckBox locality =   (CheckBox)findViewById(R.id.locality);
         skills_status.set(0,driving2.isChecked());
         skills_status.set(1,driving4.isChecked());
         skills_status.set(2,billing.isChecked());
+        skills_status.set(2,map.isChecked());
+        skills_status.set(2,locality.isChecked());
     }
     private void proceeding() {
-
         checkBoxStatus();
-
         Providers provider =new Providers( enterprise_name.getText().toString(), monthly_salary.getText().toString(), field_status, job_category_status, languages_known_status, skills_status);
         DatabaseReference def = providerDB.getReference();
         def.child("Job Provider").child(preferenceManager.getString(Constants.KEY_USER_ID)).setValue(provider)
@@ -163,6 +164,10 @@ public class JobProvidersForm1 extends AppCompatActivity {
         skills_name.add(R.string.driving2);
         skills_name.add(R.string.driving4);
         skills_name.add(R.string.billing);
+        skills_name.add(R.string.using_google_map);
+        skills_name.add(R.string.good_knowledge_about_locality);
+        skills_status.add(false);
+        skills_status.add(false);
         skills_status.add(false);
         skills_status.add(false);
         skills_status.add(false);
