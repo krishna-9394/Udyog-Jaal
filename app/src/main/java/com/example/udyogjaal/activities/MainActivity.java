@@ -1,15 +1,10 @@
 package com.example.udyogjaal.activities;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,15 +16,8 @@ import com.example.udyogjaal.application_form.JobProvidersForm1;
 import com.example.udyogjaal.application_form.JobSeekersForm1;
 import com.example.udyogjaal.utilities.Constants;
 import com.example.udyogjaal.utilities.PreferenceManager;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.squareup.picasso.Picasso;
-
-import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
     private ImageView profile, back;
@@ -44,9 +32,8 @@ public class MainActivity extends AppCompatActivity {
         preferenceManager = new PreferenceManager(getApplicationContext());
         initialization();
         loadingUserDetails();
-        setlistener();
+        listener();
     }
-
     private void initialization() {
         provider = findViewById(R.id.layout1);
         seeker = findViewById(R.id.layout2);
@@ -65,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     public void showToast(String message){
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
-    private void setlistener() {
+    private void listener() {
         back.setOnClickListener(view -> {
             preferenceManager.clear();
             startActivity(new Intent(MainActivity.this, SignIn_Page.class));

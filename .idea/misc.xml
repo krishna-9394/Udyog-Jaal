@@ -19,7 +19,7 @@
         <entry key="..\:/Users/Krishna Kumar K/AndroidStudioProjects/UdyogJaal/app/src/main/res/drawable/user_button_background.xml" value="0.167" />
         <entry key="..\:/Users/Krishna Kumar K/AndroidStudioProjects/UdyogJaal/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.20612244897959184" />
         <entry key="..\:/Users/Krishna Kumar K/AndroidStudioProjects/UdyogJaal/app/src/main/res/layout-w936dp/activity_login.xml" value="0.118359375" />
-        <entry key="..\:/Users/Krishna Kumar K/AndroidStudioProjects/UdyogJaal/app/src/main/res/layout/activity_job_providers_form1.xml" value="0.1578125" />
+        <entry key="..\:/Users/Krishna Kumar K/AndroidStudioProjects/UdyogJaal/app/src/main/res/layout/activity_job_providers_form1.xml" value="0.22" />
         <entry key="..\:/Users/Krishna Kumar K/AndroidStudioProjects/UdyogJaal/app/src/main/res/layout/activity_job_providers_form2.xml" value="0.22" />
         <entry key="..\:/Users/Krishna Kumar K/AndroidStudioProjects/UdyogJaal/app/src/main/res/layout/activity_job_seekers_form1.xml" value="0.22" />
         <entry key="..\:/Users/Krishna Kumar K/AndroidStudioProjects/UdyogJaal/app/src/main/res/layout/activity_job_seekers_form2.xml" value="0.16666666666666666" />
@@ -28,6 +28,8 @@
         <entry key="..\:/Users/Krishna Kumar K/AndroidStudioProjects/UdyogJaal/app/src/main/res/layout/activity_main.xml" value="0.14666666666666667" />
         <entry key="..\:/Users/Krishna Kumar K/AndroidStudioProjects/UdyogJaal/app/src/main/res/layout/activity_sign_in_page.xml" value="0.22" />
         <entry key="..\:/Users/Krishna Kumar K/AndroidStudioProjects/UdyogJaal/app/src/main/res/layout/activity_sign_up_page.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/Krishna Kumar K/AndroidStudioProjects/UdyogJaal/app/src/main/res/layout/drop_down_item.xml" value="0.12868747327917915" />
+        <entry key="..\:/Users/Krishna Kumar K/AndroidStudioProjects/UdyogJaal/app/src/main/res/layout/seekers_profile.xml" value="0.22" />
       </map>
     </option>
   </component>

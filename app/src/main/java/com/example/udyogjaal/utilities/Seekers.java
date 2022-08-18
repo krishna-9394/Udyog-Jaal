@@ -1,4 +1,4 @@
 package com.example.udyogjaal.utilities;
 
-public class Seekers {
+public class Seekers extends User {
 }

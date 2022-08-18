@@ -68,7 +68,6 @@ public class SignUp_Page extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_page);
         preferenceManager=new PreferenceManager(getApplicationContext());
-
         loginDB = FirebaseDatabase.getInstance();
         storage = FirebaseStorage.getInstance();
 
@@ -87,7 +86,6 @@ public class SignUp_Page extends AppCompatActivity {
         progressBar = findViewById(R.id.progress_bar);
         addImage = (FloatingActionButton) findViewById(R.id.add_image);
         userProfile = (RoundedImageView) findViewById(R.id.signUp_logo);
-        Log.v("message","initialization completed");
 
     }  // initialization the views
     public void showToast(String message){
@@ -190,12 +188,14 @@ public class SignUp_Page extends AppCompatActivity {
         loading(true);
         User user = new User(email.getText().toString().trim(), url, name.getText().toString().trim(), password.getText().toString().trim());
         DatabaseReference def = loginDB.getReference();
-        def.child("users").push().setValue(user)
+        String key = def.child("users").push().getKey();
+        def.child("users").child(key).setValue(user)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
                         loading(false);
                             // adding data to permanent memory after the login
+                            preferenceManager.putString(Constants.KEY_USER_ID,key);
                             preferenceManager.putBoolean(Constants.KEY_IS_SIGNED_IN, true);
                             preferenceManager.putString(Constants.KEY_NAME, name.getText().toString());
                             preferenceManager.putString(Constants.KEY_IMAGE_URL, url);

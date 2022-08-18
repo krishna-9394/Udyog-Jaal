@@ -2,23 +2,18 @@ package com.example.udyogjaal.utilities;
 
 import java.util.ArrayList;
 
-public class Providers {
-    private String enterprise_name, field, job_type;
-    private int monthly_salary;
-    private String job_category, available_post;
-    private ArrayList<String> requirement;
-
+public class Providers{
+    private String enterprise_name,monthly_salary;
+    private ArrayList<Boolean> field_status, job_category_status, languages_known_status, skill_status;
     public Providers() {
     }
-
-    public Providers(String enterprise_name, String field, String job_type, int monthly_salary, String job_category, String available_post, ArrayList<String> requirement) {
+    public Providers(String enterprise_name, String monthly_salary, ArrayList<Boolean> field_status, ArrayList<Boolean> job_category_status, ArrayList<Boolean> languages_known_status, ArrayList<Boolean> skill_status) {
         this.enterprise_name = enterprise_name;
-        this.field = field;
-        this.job_type = job_type;
         this.monthly_salary = monthly_salary;
-        this.job_category = job_category;
-        this.available_post = available_post;
-        this.requirement = requirement;
+        this.field_status = field_status;
+        this.job_category_status = job_category_status;
+        this.languages_known_status = languages_known_status;
+        this.skill_status = skill_status;
     }
 
     public String getEnterprise_name() {
@@ -29,51 +24,43 @@ public class Providers {
         this.enterprise_name = enterprise_name;
     }
 
-    public String getField() {
-        return field;
-    }
-
-    public void setField(String field) {
-        this.field = field;
-    }
-
-    public String getJob_type() {
-        return job_type;
-    }
-
-    public void setJob_type(String job_type) {
-        this.job_type = job_type;
-    }
-
-    public int getMonthly_salary() {
+    public String getMonthly_salary() {
         return monthly_salary;
     }
 
-    public void setMonthly_salary(int monthly_salary) {
+    public void setMonthly_salary(String monthly_salary) {
         this.monthly_salary = monthly_salary;
     }
 
-    public String getJob_category() {
-        return job_category;
+    public ArrayList<Boolean> getField_status() {
+        return field_status;
     }
 
-    public void setJob_category(String job_category) {
-        this.job_category = job_category;
+    public void setField_status(ArrayList<Boolean> field_status) {
+        this.field_status = field_status;
     }
 
-    public String getAvailable_post() {
-        return available_post;
+    public ArrayList<Boolean> getJob_category_status() {
+        return job_category_status;
     }
 
-    public void setAvailable_post(String available_post) {
-        this.available_post = available_post;
+    public void setJob_category_status(ArrayList<Boolean> job_category_status) {
+        this.job_category_status = job_category_status;
     }
 
-    public ArrayList<String> getRequirement() {
-        return requirement;
+    public ArrayList<Boolean> getLanguages_known_status() {
+        return languages_known_status;
     }
 
-    public void setRequirement(ArrayList<String> requirement) {
-        this.requirement = requirement;
+    public void setLanguages_known_status(ArrayList<Boolean> languages_known_status) {
+        this.languages_known_status = languages_known_status;
+    }
+
+    public ArrayList<Boolean> getSkill_status() {
+        return skill_status;
+    }
+
+    public void setSkill_status(ArrayList<Boolean> skill_status) {
+        this.skill_status = skill_status;
     }
 }

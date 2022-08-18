@@ -63,4 +63,19 @@
     <string name="proceed">Proceed</string>
     <string name="post">Post</string>
     <string name="target_tittle">Target Tittle</string>
+    <string name="expericence">Expericence</string>
+    <string name="experience">Experience</string>
+    <string name="electrical">Electricals</string>
+    <string name="hardware">Hardware and Tools</string>
+    <string name="paint_and_sanitary">Paint and Sanitary</string>
+    <string name="provisional_store">Proivisional Store</string>
+    <string name="fancy_store">Fancy Store</string>
+    <string name="textile">Textile Store</string>
+    <string name="glass">Glass and Plywood</string>
+    <string name="wholesale">Wholesale Store</string>
+    <string name="retail">Retailer Store</string>
+    <string name="supplier">Supplier</string>
+    <string name="driving2">Two Wheeler Driving</string>
+    <string name="driving4">Four Wheeler Driving</string>
+    <string name="skills">Skills</string>
 </resources>

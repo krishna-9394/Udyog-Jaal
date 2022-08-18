@@ -1,5 +1,7 @@
 package com.example.udyogjaal.utilities;
 
+import java.util.ArrayList;
+
 public class Constants {
     public static final String KEY_USER_COLLECTION = "user";
     public static final String KEY_PREFERENCE_NAME = "chatAppPreference";
@@ -11,5 +13,5 @@ public class Constants {
     public static final String KEY_USER_TYPE = "usertype";
     public static final String KEY_IMAGE = "userimage";
     public static final String KEY_IMAGE_URL = "imageurl";
-//    public static final String KEY_
+    public static final String KEY_IS_PROVIDER1_DONE = "provider";
 }

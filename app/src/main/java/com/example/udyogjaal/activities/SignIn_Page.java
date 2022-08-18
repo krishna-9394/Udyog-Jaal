@@ -81,6 +81,7 @@ public class SignIn_Page extends AppCompatActivity {
                                 String password_string = password.getText().toString();
                                 if(user.getEmail().equals(email_string) && user.getPassword().equals(password_string)){
                                     is_matching = true;
+                                    preferenceManager.putString(Constants.KEY_USER_ID, snap.getKey());
                                     preferenceManager.putBoolean(Constants.KEY_IS_SIGNED_IN,true);
                                     preferenceManager.putString(Constants.KEY_NAME, user.getName());
                                     preferenceManager.putString(Constants.KEY_IMAGE_URL, user.getImage_url());
@@ -90,10 +91,11 @@ public class SignIn_Page extends AppCompatActivity {
                                     startActivity(intent);
                                     break;
                                 }
-                                if(!is_matching) {
-                                    showToast("invalid credentials...");
-                                    loading(false);
-                                }
+
+                        }
+                            if(!is_matching) {
+                            showToast("invalid credentials...");
+                            loading(false);
                         }
                     }
 
