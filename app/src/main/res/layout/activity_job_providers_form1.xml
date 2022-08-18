@@ -422,7 +422,6 @@
                     android:layout_marginTop="10dp" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
             <androidx.appcompat.widget.AppCompatButton android:id="@+id/providers_proceed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

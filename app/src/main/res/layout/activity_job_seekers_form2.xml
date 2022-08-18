@@ -33,115 +33,85 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0"
                 app:srcCompat="@drawable/form_background"/>
-            <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/target_tittle_input_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp">
-                <EditText android:id="@+id/target_tittle_input"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="30dp"
-                    android:layout_marginBottom="20dp"
-                    android:autofillHints=""
-                    android:background="@drawable/edit_view_background"
-                    android:inputType="text"
-                    android:minHeight="48dp"
-                    android:paddingStart="15dp"
-                    android:paddingTop="8dp"
-                    android:paddingEnd="15dp"
-                    android:paddingBottom="8dp"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0"
-                    tools:ignore="SpeakableTextPresentCheck" />
-                <TextView android:id="@+id/target_tittle_tag"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="40dp"
-                    android:background="@drawable/input_tag_background"
-                    android:paddingStart="5dp"
-                    android:paddingEnd="5dp"
-                    android:text="@string/target_tittle"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.16" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
             <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/job_type_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp">
 
-                <RadioGroup
-                    android:orientation="vertical"
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="30dp"
                     android:layout_marginBottom="20dp"
                     android:autofillHints=""
                     android:background="@drawable/edit_view_background"
-                    android:inputType="phone"
-                    android:minHeight="48dp"
-                    android:paddingStart="15dp"
-                    android:paddingTop="8dp"
-                    android:paddingEnd="15dp"
-                    android:paddingBottom="8dp"
+                    android:orientation="vertical"
+                    android:padding="10dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" >
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0">
 
-                    <RadioButton android:id="@+id/radioButton"
-                        android:layout_width="wrap_content"
+                    <CheckBox
+                        android:id="@+id/electrical"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="10dp"
-                        tools:ignore="RtlSymmetry"
-                        android:layout_marginStart="20dp"
-                        android:text="@string/part_time" />
-                    <RadioButton android:id="@+id/radioButton2"
-                        android:layout_width="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:text="@string/electrical"
+                        tools:ignore="RtlSymmetry" />
+
+                    <CheckBox
+                        android:id="@+id/hardware"
+                        android:layout_marginStart="15dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="10dp"
-                        tools:ignore="RtlSymmetry"
-                        android:layout_marginStart="20dp"
-                        android:text="@string/full_time" />
-                    <RadioButton android:id="@+id/radioButton3"
-                        android:layout_width="wrap_content"
+                        android:text="@string/hardware"
+                        tools:ignore="RtlSymmetry" />
+
+                    <CheckBox
+                        android:id="@+id/paint"
+                        android:layout_marginStart="15dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="10dp"
-                        tools:ignore="RtlSymmetry"
-                        android:layout_marginStart="20dp"
-                        android:text="@string/permanent" />
-                    <RadioButton android:id="@+id/radioButton4"
-                        android:layout_width="wrap_content"
+                        android:text="@string/paint_and_sanitary"
+                        tools:ignore="RtlSymmetry" />
+
+                    <CheckBox
+                        android:id="@+id/provisional"
+                        android:layout_marginStart="15dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="10dp"
-                        tools:ignore="RtlSymmetry"
-                        android:layout_marginStart="20dp"
-                        android:text="@string/temporary" />
-                    <RadioButton android:id="@+id/radioButton5"
-                        android:layout_width="wrap_content"
+                        android:text="@string/provisional_store"
+                        tools:ignore="RtlSymmetry" />
+
+                    <CheckBox
+                        android:id="@+id/fancy"
+                        android:layout_marginStart="15dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="10dp"
-                        tools:ignore="RtlSymmetry"
-                        android:layout_marginStart="20dp"
-                        android:text="@string/contract" />
-                </RadioGroup>
+                        android:text="@string/fancy_store"
+                        tools:ignore="RtlSymmetry" />
+
+                    <CheckBox
+                        android:id="@+id/textile"
+                        android:layout_marginStart="15dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/textile"
+                        tools:ignore="RtlSymmetry" />
+
+                    <CheckBox
+                        android:id="@+id/glass"
+                        android:layout_marginStart="15dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/glass"
+                        tools:ignore="RtlSymmetry" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <TextView android:id="@+id/gender_tag"
                     android:layout_width="wrap_content"
@@ -150,7 +120,7 @@
                     android:background="@drawable/input_tag_background"
                     android:paddingStart="5dp"
                     android:paddingEnd="5dp"
-                    android:text="@string/job_type"
+                    android:text="@string/field"
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     app:layout_constraintStart_toStartOf="parent"
@@ -158,56 +128,13 @@
                     android:layout_marginTop="10dp" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-            <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/salary_input_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp">
-
-                <EditText android:id="@+id/salary_input"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="30dp"
-                    android:layout_marginBottom="20dp"
-                    android:autofillHints=""
-                    android:background="@drawable/edit_view_background"
-                    android:inputType="number"
-                    android:minHeight="48dp"
-                    android:paddingStart="15dp"
-                    android:paddingTop="8dp"
-                    android:paddingEnd="15dp"
-                    android:paddingBottom="8dp"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0"
-                    tools:ignore="SpeakableTextPresentCheck" />
-                <TextView android:id="@+id/salary_tag"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="40dp"
-                    android:background="@drawable/input_tag_background"
-                    android:paddingStart="5dp"
-                    android:textStyle="bold"
-                    android:paddingEnd="5dp"
-                    android:text="@string/salary"
-                    android:textColor="@color/black"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.16" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-            <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/post_input_layout"
+            <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/experience_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp">
 
                 <EditText
-                    android:id="@+id/st_input"
+                    android:id="@+id/experience_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
@@ -230,7 +157,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0"
                     tools:ignore="SpeakableTextPresentCheck" />
-                <TextView android:id="@+id/post_tag"
+                <TextView android:id="@+id/experience_tag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="40dp"
@@ -238,43 +165,59 @@
                     android:paddingStart="5dp"
                     android:paddingEnd="5dp"
                     android:textStyle="bold"
-                    android:text="@string/post"
+                    android:text="@string/experience"
                     android:textColor="@color/black"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.16" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-            <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/available_post_input_layout"
+            <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/job_category_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp">
 
-                <EditText
-                    android:id="@+id/available_post_input"
+
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="30dp"
                     android:layout_marginBottom="20dp"
                     android:autofillHints=""
                     android:background="@drawable/edit_view_background"
-                    android:inputType="textPersonName"
-                    android:minHeight="48dp"
-                    android:paddingStart="15dp"
-                    android:paddingTop="8dp"
-                    android:paddingEnd="15dp"
-                    android:paddingBottom="8dp"
-                    android:textSize="18sp"
+                    android:orientation="vertical"
+                    android:padding="10dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0"
-                    tools:ignore="SpeakableTextPresentCheck" />
-                <TextView android:id="@+id/available_post_tag"
+                    app:layout_constraintVertical_bias="0.0">
+
+                    <CheckBox
+                        android:id="@+id/wholesale"
+                        android:layout_marginStart="15dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/wholesale" />
+
+                    <CheckBox
+                        android:id="@+id/retail"
+                        android:layout_marginStart="15dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/retail" />
+
+                    <CheckBox
+                        android:id="@+id/supplier"
+                        android:layout_marginStart="15dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/supplier" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+                <TextView android:id="@+id/job_category_tag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="40dp"
@@ -282,21 +225,167 @@
                     android:paddingStart="5dp"
                     android:paddingEnd="5dp"
                     android:textStyle="bold"
-                    android:text="@string/post_name"
+                    android:text="@string/job_category"
                     android:textColor="@color/black"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.16" />
+                    android:layout_marginTop="10dp" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/languages_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp">
 
-            <androidx.appcompat.widget.AppCompatButton android:id="@+id/button"
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginBottom="20dp"
+                    android:autofillHints=""
+                    android:background="@drawable/edit_view_background"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0">
+
+                    <CheckBox
+                        android:id="@+id/pro_hindi"
+                        android:layout_marginStart="15dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hindi" />
+
+                    <CheckBox
+                        android:id="@+id/pro_english"
+                        android:layout_marginStart="15dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/english" />
+
+                    <CheckBox
+                        android:id="@+id/pro_kannada"
+                        android:layout_marginStart="15dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/kannada" />
+
+                    <CheckBox
+                        android:id="@+id/pro_telgu"
+                        android:layout_marginStart="15dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/telgu" />
+
+                    <CheckBox
+                        android:id="@+id/pro_malyalam"
+                        android:layout_marginStart="15dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/malyalam" />
+
+                    <CheckBox
+                        android:id="@+id/pro_tamil"
+                        android:layout_marginStart="15dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tamil" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <TextView
+                    android:id="@+id/languages_tag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="44dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/input_tag_background"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:text="@string/languages_known"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/skills_input_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginBottom="20dp"
+                    android:autofillHints=""
+                    android:background="@drawable/edit_view_background"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0">
+
+                    <CheckBox android:id="@+id/driving2"
+                        android:layout_marginStart="15dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/driving2" />
+                    <CheckBox android:id="@+id/driving4"
+                        android:layout_marginStart="15dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/driving4" />
+                    <CheckBox android:id="@+id/billing"
+                        android:layout_marginStart="15dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/billing" />
+                    <CheckBox android:id="@+id/map"
+                        android:text="@string/using_google_map"
+                        android:layout_marginStart="15dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        />
+                    <CheckBox android:id="@+id/locality"
+                        android:text="@string/good_knowledge_about_locality"
+                        android:layout_marginStart="15dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <TextView android:id="@+id/skills"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
+                    android:background="@drawable/input_tag_background"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:text="@string/skills"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="10dp" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.appcompat.widget.AppCompatButton android:id="@+id/submit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:background="@drawable/button_background"
                 android:backgroundTint="#C302AFFD"
-                android:text="@string/proceed" />
+                android:text="@string/submit" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
