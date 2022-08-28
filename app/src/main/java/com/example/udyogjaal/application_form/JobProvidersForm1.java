@@ -27,15 +27,14 @@ import java.util.ArrayList;
 public class JobProvidersForm1 extends AppCompatActivity {
     private EditText enterprise_name, monthly_salary;
     private Button proceed;
-    ArrayList<Integer> field_name = new ArrayList<Integer>(7);
-    ArrayList<Boolean> field_status = new ArrayList<Boolean>(7);
-    ArrayList<Integer> job_category_name = new ArrayList<Integer>(3);
-    ArrayList<Boolean> job_category_status = new ArrayList<Boolean>(3);
-    ArrayList<Integer> languages_known_name = new ArrayList<Integer>(6);
-    ArrayList<Boolean> languages_known_status = new ArrayList<Boolean>(6);
-    ArrayList<Integer> skills_name = new ArrayList<Integer>(5);
-    ArrayList<Boolean> skills_status = new ArrayList<Boolean>(5);
-
+    private ArrayList<String> field_name = new ArrayList<String>(7);
+    private ArrayList<Boolean> field_status = new ArrayList<Boolean>(7);
+    private ArrayList<String> job_category_name = new ArrayList<String>(3);
+    private ArrayList<Boolean> job_category_status = new ArrayList<Boolean>(3);
+    private ArrayList<String> languages_known_name = new ArrayList<String>(6);
+    private ArrayList<Boolean> languages_known_status = new ArrayList<Boolean>(6);
+    private ArrayList<String> skills_name = new ArrayList<String>(5);
+    private ArrayList<Boolean> skills_status = new ArrayList<Boolean>(5);
     private FirebaseDatabase providerDB;
     private PreferenceManager preferenceManager;
 
@@ -50,6 +49,9 @@ public class JobProvidersForm1 extends AppCompatActivity {
         }
         setContentView(R.layout.activity_job_providers_form1);
         initializing();
+        listeners();
+    }
+    private void listeners() {
         proceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,13 +128,13 @@ public class JobProvidersForm1 extends AppCompatActivity {
         monthly_salary = findViewById(R.id.company_salary_input);
         proceed = findViewById(R.id.providers_proceed);
         // field names and status
-        field_name.add(R.string.electrical);
-        field_name.add(R.string.hardware);
-        field_name.add(R.string.paint_and_sanitary);
-        field_name.add(R.string.provisional_store);
-        field_name.add(R.string.fancy_store);
-        field_name.add(R.string.textile);
-        field_name.add(R.string.glass);
+        field_name.add("electrical");
+        field_name.add("hardware");
+        field_name.add("paint_and_sanitary");
+        field_name.add("provisional_store");
+        field_name.add("fancy_store");
+        field_name.add("textile");
+        field_name.add("glass");
         field_status.add(false);
         field_status.add(false);
         field_status.add(false);
@@ -141,19 +143,19 @@ public class JobProvidersForm1 extends AppCompatActivity {
         field_status.add(false);
         field_status.add(false);
         // job category name and status
-        job_category_name.add(R.string.wholesale);
-        job_category_name.add(R.string.retail);
-        job_category_name.add(R.string.supplier);
+        job_category_name.add("wholesale");
+        job_category_name.add("retail");
+        job_category_name.add("supplier");
         job_category_status.add(false);
         job_category_status.add(false);
         job_category_status.add(false);
         // languages known name and status
-        languages_known_name.add(R.string.hindi);
-        languages_known_name.add(R.string.english);
-        languages_known_name.add(R.string.kannada);
-        languages_known_name.add(R.string.telgu);
-        languages_known_name.add(R.string.malyalam);
-        languages_known_name.add(R.string.tamil);
+        languages_known_name.add("hindi");
+        languages_known_name.add("english");
+        languages_known_name.add("kannada");
+        languages_known_name.add("telgu");
+        languages_known_name.add("malyalam");
+        languages_known_name.add("tamil");
         languages_known_status.add(false);
         languages_known_status.add(false);
         languages_known_status.add(false);
@@ -161,11 +163,11 @@ public class JobProvidersForm1 extends AppCompatActivity {
         languages_known_status.add(false);
         languages_known_status.add(false);
         // skill names and status
-        skills_name.add(R.string.driving2);
-        skills_name.add(R.string.driving4);
-        skills_name.add(R.string.billing);
-        skills_name.add(R.string.using_google_map);
-        skills_name.add(R.string.good_knowledge_about_locality);
+        skills_name.add("driving2");
+        skills_name.add("driving4");
+        skills_name.add("billing");
+        skills_name.add("using_google_map");
+        skills_name.add("good_knowledge_about_locality");
         skills_status.add(false);
         skills_status.add(false);
         skills_status.add(false);

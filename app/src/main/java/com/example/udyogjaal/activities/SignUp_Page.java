@@ -199,6 +199,7 @@ public class SignUp_Page extends AppCompatActivity {
                             preferenceManager.putBoolean(Constants.KEY_IS_SIGNED_IN, true);
                             preferenceManager.putString(Constants.KEY_NAME, name.getText().toString());
                             preferenceManager.putString(Constants.KEY_IMAGE_URL, url);
+                            preferenceManager.putString(Constants.KEY_USER_TYPE,"null");
                             Intent intent = new Intent(SignUp_Page.this, MainActivity.class);
                             startActivity(intent);
                     }

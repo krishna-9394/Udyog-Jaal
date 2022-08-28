@@ -57,7 +57,7 @@
                     app:layout_constraintVertical_bias="0.0">
 
                     <CheckBox
-                        android:id="@+id/electrical"
+                        android:id="@+id/seekers_electrical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
@@ -65,7 +65,7 @@
                         tools:ignore="RtlSymmetry" />
 
                     <CheckBox
-                        android:id="@+id/hardware"
+                        android:id="@+id/seekers_hardware"
                         android:layout_marginStart="15dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -73,7 +73,7 @@
                         tools:ignore="RtlSymmetry" />
 
                     <CheckBox
-                        android:id="@+id/paint"
+                        android:id="@+id/seekers_paint"
                         android:layout_marginStart="15dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -81,7 +81,7 @@
                         tools:ignore="RtlSymmetry" />
 
                     <CheckBox
-                        android:id="@+id/provisional"
+                        android:id="@+id/seekers_provisional"
                         android:layout_marginStart="15dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -89,7 +89,7 @@
                         tools:ignore="RtlSymmetry" />
 
                     <CheckBox
-                        android:id="@+id/fancy"
+                        android:id="@+id/seekers_fancy"
                         android:layout_marginStart="15dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -97,7 +97,7 @@
                         tools:ignore="RtlSymmetry" />
 
                     <CheckBox
-                        android:id="@+id/textile"
+                        android:id="@+id/seekers_textile"
                         android:layout_marginStart="15dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -105,7 +105,7 @@
                         tools:ignore="RtlSymmetry" />
 
                     <CheckBox
-                        android:id="@+id/glass"
+                        android:id="@+id/seekers_glass"
                         android:layout_marginStart="15dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -134,7 +134,7 @@
                 android:layout_marginTop="0dp">
 
                 <EditText
-                    android:id="@+id/experience_input"
+                    android:id="@+id/seekers_experience_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
@@ -157,7 +157,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0"
                     tools:ignore="SpeakableTextPresentCheck" />
-                <TextView android:id="@+id/experience_tag"
+                <TextView android:id="@+id/seekers_experience_tag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="40dp"
@@ -197,27 +197,27 @@
                     app:layout_constraintVertical_bias="0.0">
 
                     <CheckBox
-                        android:id="@+id/wholesale"
+                        android:id="@+id/seekers_wholesale"
                         android:layout_marginStart="15dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/wholesale" />
 
                     <CheckBox
-                        android:id="@+id/retail"
+                        android:id="@+id/seekers_retail"
                         android:layout_marginStart="15dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/retail" />
 
                     <CheckBox
-                        android:id="@+id/supplier"
+                        android:id="@+id/seekers_supplier"
                         android:layout_marginStart="15dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/supplier" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
-                <TextView android:id="@+id/job_category_tag"
+                <TextView android:id="@+id/seekers_job_category_tag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="40dp"
@@ -255,42 +255,42 @@
                     app:layout_constraintVertical_bias="0.0">
 
                     <CheckBox
-                        android:id="@+id/pro_hindi"
+                        android:id="@+id/seekers_hindi"
                         android:layout_marginStart="15dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/hindi" />
 
                     <CheckBox
-                        android:id="@+id/pro_english"
+                        android:id="@+id/seekers_english"
                         android:layout_marginStart="15dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/english" />
 
                     <CheckBox
-                        android:id="@+id/pro_kannada"
+                        android:id="@+id/seekers_kannada"
                         android:layout_marginStart="15dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/kannada" />
 
                     <CheckBox
-                        android:id="@+id/pro_telgu"
+                        android:id="@+id/seekers_telgu"
                         android:layout_marginStart="15dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/telgu" />
 
                     <CheckBox
-                        android:id="@+id/pro_malyalam"
+                        android:id="@+id/seekers_malyalam"
                         android:layout_marginStart="15dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/malyalam" />
 
                     <CheckBox
-                        android:id="@+id/pro_tamil"
+                        android:id="@+id/seekers_tamil"
                         android:layout_marginStart="15dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -298,7 +298,7 @@
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <TextView
-                    android:id="@+id/languages_tag"
+                    android:id="@+id/seekers_languages_tag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="44dp"
@@ -335,28 +335,28 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0">
 
-                    <CheckBox android:id="@+id/driving2"
+                    <CheckBox android:id="@+id/seekers_driving2"
                         android:layout_marginStart="15dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/driving2" />
-                    <CheckBox android:id="@+id/driving4"
+                    <CheckBox android:id="@+id/seekers_driving4"
                         android:layout_marginStart="15dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/driving4" />
-                    <CheckBox android:id="@+id/billing"
+                    <CheckBox android:id="@+id/seekers_billing"
                         android:layout_marginStart="15dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/billing" />
-                    <CheckBox android:id="@+id/map"
+                    <CheckBox android:id="@+id/seekers_map"
                         android:text="@string/using_google_map"
                         android:layout_marginStart="15dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         />
-                    <CheckBox android:id="@+id/locality"
+                    <CheckBox android:id="@+id/seekers_locality"
                         android:text="@string/good_knowledge_about_locality"
                         android:layout_marginStart="15dp"
                         android:layout_width="match_parent"
@@ -364,7 +364,7 @@
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
-                <TextView android:id="@+id/skills"
+                <TextView android:id="@+id/seekers_skills"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="40dp"
@@ -379,7 +379,7 @@
                     android:layout_marginTop="10dp" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-            <androidx.appcompat.widget.AppCompatButton android:id="@+id/submit"
+            <androidx.appcompat.widget.AppCompatButton android:id="@+id/seekers_submit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"

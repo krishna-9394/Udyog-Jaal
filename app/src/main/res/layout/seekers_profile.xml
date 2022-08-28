@@ -22,8 +22,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:riv_oval="true" />
 
-    <TextView
-        android:id="@+id/seekers_name"
+    <TextView android:id="@+id/seekers_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
@@ -38,24 +37,7 @@
         app:layout_constraintStart_toEndOf="@id/seekersImage"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="RtlSymmetry" />
-
-    <TextView
-        android:id="@+id/seekers_field"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="130dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="15dp"
-        android:paddingStart="20dp"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:text="@string/field"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/seekers_root"
-        app:layout_constraintStart_toEndOf="@+id/seekersImage"
-        tools:ignore="RtlSymmetry" />
-    <TextView
-        android:id="@+id/seekers_experience"
+    <TextView android:id="@+id/seekers_experience"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="130dp"
@@ -65,6 +47,20 @@
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
         android:text="@string/experience"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/seekers_root"
+        app:layout_constraintStart_toEndOf="@+id/seekersImage"
+        tools:ignore="RtlSymmetry" />
+    <TextView android:id="@+id/seekers_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="130dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="15dp"
+        android:paddingStart="20dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:text="@string/field"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/seekers_root"
         app:layout_constraintStart_toEndOf="@+id/seekersImage"

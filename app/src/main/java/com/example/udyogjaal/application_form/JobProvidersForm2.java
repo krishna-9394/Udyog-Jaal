@@ -36,7 +36,6 @@ public class JobProvidersForm2 extends AppCompatActivity {
         setContentView(R.layout.activity_job_providers_form2);
         initializing();
     }
-
     private void initializing() {
         manager_name = findViewById(R.id.manager_name_input);
         contact_number = findViewById(R.id.contact_number_input);
@@ -50,14 +49,13 @@ public class JobProvidersForm2 extends AppCompatActivity {
             }
         });
     }
-
     private void submit() {
-        DatabaseReference def = providerDB.getReference();
         HashMap<String,String> details = new HashMap<>();
-        details.put("manager name", manager_name.getText().toString());
-        details.put("contact number", contact_number.getText().toString());
+        details.put("managerName", manager_name.getText().toString());
+        details.put("contactNumber", contact_number.getText().toString());
         details.put("address", address.getText().toString());
         details.put("state", state.getText().toString());
+        DatabaseReference def = providerDB.getReference();
         def.child("Job Providers Details").child(preferenceManager.getString(Constants.KEY_USER_ID)).setValue(details)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -67,7 +65,6 @@ public class JobProvidersForm2 extends AppCompatActivity {
                     }
                 });
     }
-
     private boolean validateCredentials() {
         if(TextUtils.isEmpty(manager_name.getText().toString())){
             showToast("manger name field is empty");
