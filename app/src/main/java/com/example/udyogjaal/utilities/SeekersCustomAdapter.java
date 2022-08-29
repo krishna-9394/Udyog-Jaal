@@ -13,16 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.udyogjaal.R;
-import com.example.udyogjaal.activities.MainActivity;
-import com.example.udyogjaal.databinding.SeekersProfileBinding;
 
 import java.util.ArrayList;
 
-public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder>{
+public class SeekersCustomAdapter extends RecyclerView.Adapter<SeekersCustomAdapter.MyViewHolder>{
     Context context;
     ArrayList<SeekersProfile> list;
 
-    public CustomAdapter(Context context, ArrayList<SeekersProfile> list) {
+    public SeekersCustomAdapter(Context context, ArrayList<SeekersProfile> list) {
         this.context = context;
         this.list = list;
     }
@@ -31,7 +29,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.seekers_profile, parent, false);
-            return new MyViewHolder(view);
+        return new MyViewHolder(view);
     }
 
     @Override

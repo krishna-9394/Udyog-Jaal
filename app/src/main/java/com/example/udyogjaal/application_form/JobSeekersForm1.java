@@ -29,13 +29,13 @@ public class JobSeekersForm1 extends AppCompatActivity {
     private RadioGroup rg;
     private String sex;
     private RadioButton male, female, other;
-    private FirebaseDatabase providerDB;
+    private FirebaseDatabase seekerDB;
     private PreferenceManager preferenceManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         preferenceManager=new PreferenceManager(getApplicationContext());
-        providerDB = FirebaseDatabase.getInstance();
+        seekerDB = FirebaseDatabase.getInstance();
         if(preferenceManager.getBoolean(Constants.KEY_IS_SEEKER1_DONE)){
             startActivity(new Intent(JobSeekersForm1.this, JobSeekersForm2.class));
         }
@@ -72,7 +72,7 @@ public class JobSeekersForm1 extends AppCompatActivity {
         seekers.setContact_number(contact_number.getText().toString());
         seekers.setAddress(address.getText().toString());
         seekers.setSex(sex);
-        DatabaseReference def = providerDB.getReference("Job Seekers Details");
+        DatabaseReference def = seekerDB.getReference("Job Seekers Details");
         def.child(preferenceManager.getString(Constants.KEY_USER_ID)).setValue(seekers)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

@@ -1,5 +1,6 @@
 package com.example.udyogjaal.application_form;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -14,9 +15,13 @@ import com.example.udyogjaal.R;
 import com.example.udyogjaal.activities.DisplayArea;
 import com.example.udyogjaal.utilities.Constants;
 import com.example.udyogjaal.utilities.PreferenceManager;
+import com.example.udyogjaal.utilities.Providers;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 
@@ -39,7 +44,7 @@ public class JobProvidersForm2 extends AppCompatActivity {
     private void initializing() {
         manager_name = findViewById(R.id.manager_name_input);
         contact_number = findViewById(R.id.contact_number_input);
-        address = findViewById(R.id.address_input);
+        address = findViewById(R.id.job_address_input);
         state = findViewById(R.id.state_input);
         submit = findViewById(R.id.submit);
         submit.setOnClickListener(new View.OnClickListener() {
@@ -50,13 +55,29 @@ public class JobProvidersForm2 extends AppCompatActivity {
         });
     }
     private void submit() {
-        HashMap<String,String> details = new HashMap<>();
-        details.put("managerName", manager_name.getText().toString());
-        details.put("contactNumber", contact_number.getText().toString());
-        details.put("address", address.getText().toString());
-        details.put("state", state.getText().toString());
-        DatabaseReference def = providerDB.getReference();
-        def.child("Job Providers Details").child(preferenceManager.getString(Constants.KEY_USER_ID)).setValue(details)
+        DatabaseReference def = providerDB.getReference("Job Providers Details");
+        def.child(preferenceManager.getString(Constants.KEY_USER_ID))
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Providers provider = snapshot.getValue(Providers.class);
+                        provider.setAddress(address.getText().toString());
+                        provider.setManager_name(manager_name.getText().toString());
+                        provider.setContact_number(contact_number.getText().toString());
+                        provider.setState(state.getText().toString());
+                        pushing(provider);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+    }
+
+    private void pushing(Providers provider) {
+        DatabaseReference def = providerDB.getReference("Job Providers Details");
+        def.child(preferenceManager.getString(Constants.KEY_USER_ID)).setValue(provider)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
@@ -65,6 +86,7 @@ public class JobProvidersForm2 extends AppCompatActivity {
                     }
                 });
     }
+
     private boolean validateCredentials() {
         if(TextUtils.isEmpty(manager_name.getText().toString())){
             showToast("manger name field is empty");

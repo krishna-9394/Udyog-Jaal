@@ -5,13 +5,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.udyogjaal.R;
 import com.example.udyogjaal.utilities.Constants;
-import com.example.udyogjaal.utilities.CustomAdapter;
+import com.example.udyogjaal.utilities.Providers;
+import com.example.udyogjaal.utilities.ProvidersCustomAdapter;
+import com.example.udyogjaal.utilities.ProvidersProfile;
+import com.example.udyogjaal.utilities.SeekersCustomAdapter;
 import com.example.udyogjaal.utilities.PreferenceManager;
 import com.example.udyogjaal.utilities.Seekers;
 import com.example.udyogjaal.utilities.SeekersProfile;
@@ -27,9 +32,10 @@ import java.util.ArrayList;
 
 public class DisplayArea extends AppCompatActivity {
     private TextView nameView;
+    private ImageView logOut;
     PreferenceManager manager;
     CircularProgressIndicator progress_circular;
-    private CustomAdapter adapter;
+    private SeekersCustomAdapter adapter;
     RecyclerView root;
     private StorageReference storageReference;
     @Override
@@ -39,11 +45,19 @@ public class DisplayArea extends AppCompatActivity {
         setContentView(R.layout.activity_display_area);
         root = findViewById(R.id.recyclerView);
         nameView = findViewById(R.id.nameView);
+        logOut = findViewById(R.id.imageBack);
+        logOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                manager.clear();
+                startActivity(new Intent(DisplayArea.this, SignIn_Page.class));
+            }
+        });
         String userType = manager.getString(Constants.KEY_USER_TYPE);
         if(userType.compareTo("seeker")==0) {
-            usersListLoader();
-        }else if(userType.compareTo("provider") == 0){
             vacancyLoader();
+        }else if(userType.compareTo("provider") == 0){
+            usersListLoader();
         }
         else {
             // hello to guest
@@ -53,7 +67,7 @@ public class DisplayArea extends AppCompatActivity {
         root.setHasFixedSize(true);
         root.setLayoutManager(new LinearLayoutManager(this));
         ArrayList<SeekersProfile> arr =new ArrayList<>();
-        CustomAdapter adapter = new CustomAdapter(getApplicationContext(),arr);
+        SeekersCustomAdapter adapter = new SeekersCustomAdapter(getApplicationContext(),arr);
         root.setAdapter(adapter);
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Job Seekers Details");
         reference.addValueEventListener(new ValueEventListener() {
@@ -79,5 +93,31 @@ public class DisplayArea extends AppCompatActivity {
     }
 
     private void vacancyLoader() {
+        root.setHasFixedSize(true);
+        root.setLayoutManager(new LinearLayoutManager(this));
+        ArrayList<ProvidersProfile> arr =new ArrayList<>();
+        ProvidersCustomAdapter adapter = new ProvidersCustomAdapter(getApplicationContext(),arr);
+        root.setAdapter(adapter);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Job Providers Details");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                arr.clear();
+                for(DataSnapshot data : snapshot.getChildren()){
+                    ProvidersProfile providersProfile = new ProvidersProfile();
+                    Providers providers = data.getValue(Providers.class);
+                    providersProfile.setName(providers.getEnterprise_name());
+                    providersProfile.setContact_number(providers.getContact_number());
+                    providersProfile.setField_status(providers.getField_status());
+                    providersProfile.setField_name(providers.getField_name());
+                    arr.add(providersProfile);
+                }
+                adapter.notifyDataSetChanged();
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
     }
+
 }

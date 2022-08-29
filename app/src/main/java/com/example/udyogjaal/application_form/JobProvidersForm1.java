@@ -1,5 +1,6 @@
 package com.example.udyogjaal.application_form;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -16,6 +17,7 @@ import com.example.udyogjaal.R;
 import com.example.udyogjaal.utilities.Constants;
 import com.example.udyogjaal.utilities.PreferenceManager;
 import com.example.udyogjaal.utilities.Providers;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -111,14 +113,31 @@ public class JobProvidersForm1 extends AppCompatActivity {
     }
     private void proceeding() {
         checkBoxStatus();
-        Providers provider =new Providers( enterprise_name.getText().toString(), monthly_salary.getText().toString(), field_status, job_category_status, languages_known_status, skills_status);
+        Providers provider =new Providers();
+        provider.setEnterprise_name(enterprise_name.getText().toString());
+        provider.setMonthly_salary(monthly_salary.getText().toString());
+        provider.setField_status(field_status);
+        provider.setJob_category_status(job_category_status);
+        provider.setLanguages_known_status(languages_known_status);
+        provider.setSkill_status(skills_status);
+        provider.setField_name(field_name);
+        provider.setJob_category_name(job_category_name);
+        provider.setLanguages_known_name(languages_known_name);
+        provider.setSkill_name(skills_name);
         DatabaseReference def = providerDB.getReference();
-        def.child("Job Provider").child(preferenceManager.getString(Constants.KEY_USER_ID)).setValue(provider)
+        def.child("Job Providers Details").child(preferenceManager.getString(Constants.KEY_USER_ID)).setValue(provider)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
+                        showToast("provider is successfully pushed");
                         preferenceManager.putBoolean(Constants.KEY_IS_PROVIDER1_DONE, true);
                         startActivity(new Intent(JobProvidersForm1.this, JobProvidersForm2.class));
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        showToast("failed "+e);
                     }
                 });
 //        def.child("Job Seekers details").child(preferenceManager.getString(Constants.KEY_USER_ID)).setValue(provide);

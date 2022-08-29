@@ -125,14 +125,13 @@
                 android:layout_marginTop="0dp">
 
                 <EditText
-                    android:id="@+id/address_input"
+                    android:id="@+id/job_address_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="30dp"
                     android:layout_marginBottom="20dp"
-                    android:autofillHints=""
                     android:background="@drawable/edit_view_background"
                     android:inputType="textPostalAddress"
                     android:minHeight="48dp"

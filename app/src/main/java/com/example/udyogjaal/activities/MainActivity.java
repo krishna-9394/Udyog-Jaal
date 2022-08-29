@@ -29,19 +29,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         preferenceManager = new PreferenceManager(getApplicationContext());
         super.onCreate(savedInstanceState);
-        switch(preferenceManager.getString(Constants.KEY_USER_TYPE)){
-            case "seeker":
-                startActivity(new Intent(MainActivity.this,JobSeekersForm1.class));
-                break;
-            case "provider":
-                startActivity(new Intent(MainActivity.this,JobProvidersForm1.class));
-                break;
-            case "guest":
-                startActivity(new Intent(MainActivity.this,DisplayArea.class));
-                break;
-            default:
-                break;
-        }
         setContentView(R.layout.activity_main);
         initialization();
         loadingUserDetails();

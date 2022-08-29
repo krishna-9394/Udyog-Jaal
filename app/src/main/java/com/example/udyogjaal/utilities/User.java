@@ -14,17 +14,6 @@ public class User {
         this.email = email;
         this.password = password;
     }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "name='" + name + '\'' +
-                ", image_url='" + image_url + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                '}';
-    }
-
     public String getName() {
         return name;
     }
