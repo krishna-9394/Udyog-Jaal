@@ -74,8 +74,10 @@ public class ProvidersCustomAdapter extends RecyclerView.Adapter<ProvidersCustom
         }
     }
     private static void phoneCall(CharSequence text) {
-        Intent callIntent = new Intent(Intent.ACTION_CALL);
-        callIntent.setData(Uri.parse("tel"+"+91"+text));
-        context.startActivity(callIntent);
+
+        String phone = "+91"+text;
+        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null));
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
     }
 }
