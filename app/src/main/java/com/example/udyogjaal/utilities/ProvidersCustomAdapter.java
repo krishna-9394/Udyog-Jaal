@@ -74,6 +74,7 @@ public class ProvidersCustomAdapter extends RecyclerView.Adapter<ProvidersCustom
             });
         }
     }
+    // finally done
     private static void phoneCall(CharSequence text) {
         Toast.makeText(context, ""+text, Toast.LENGTH_SHORT).show();
         String phone = "+91"+text;
