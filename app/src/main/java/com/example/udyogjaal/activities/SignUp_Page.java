@@ -27,6 +27,7 @@ import com.example.udyogjaal.R;
 import com.example.udyogjaal.utilities.Constants;
 import com.example.udyogjaal.utilities.PreferenceManager;
 import com.example.udyogjaal.utilities.User;
+import com.example.udyogjaal.utilities.UserType;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -46,6 +47,7 @@ import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
 
 public class SignUp_Page extends AppCompatActivity {
     private EditText name,email,password,confirmPassword;
@@ -186,10 +188,10 @@ public class SignUp_Page extends AppCompatActivity {
     }  //function to get the file extensions
     private void SignUp() {
         loading(true);
-        User user = new User(email.getText().toString().trim(), url, name.getText().toString().trim(), password.getText().toString().trim(),"guest");
+        User user = new User(email.getText().toString().trim(), url, name.getText().toString().trim(), password.getText().toString().trim());
         DatabaseReference def = loginDB.getReference();
         String key = def.child("users").push().getKey();
-        def.child("users").child(key).setValue(user)
+        def.child("user").child(key).setValue(user)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
@@ -199,7 +201,6 @@ public class SignUp_Page extends AppCompatActivity {
                             preferenceManager.putBoolean(Constants.KEY_IS_SIGNED_IN, true);
                             preferenceManager.putString(Constants.KEY_NAME, name.getText().toString());
                             preferenceManager.putString(Constants.KEY_IMAGE_URL, url);
-                            preferenceManager.putString(Constants.KEY_USER_TYPE,"null");
                             Intent intent = new Intent(SignUp_Page.this, MainActivity.class);
                             startActivity(intent);
                     }
@@ -210,6 +211,8 @@ public class SignUp_Page extends AppCompatActivity {
                             showToast(e.getMessage());
                         }
                     });
+        UserType userType = new UserType(false, false, false);
+        def.child("user type").child(key).setValue(userType);
     }  //consisting of uploading of image firebase storage and uploading it to preference manager
     private void loading(boolean isLoading) {
         if(isLoading) {

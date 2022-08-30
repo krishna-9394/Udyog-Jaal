@@ -69,7 +69,7 @@ public class SignIn_Page extends AppCompatActivity {
     private void Login() {
         loading(true);
         loginDB = FirebaseDatabase.getInstance();
-        DatabaseReference ref = loginDB.getReference().child("users");
+        DatabaseReference ref = loginDB.getReference().child("user");
         ref.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -85,8 +85,6 @@ public class SignIn_Page extends AppCompatActivity {
                                     preferenceManager.putBoolean(Constants.KEY_IS_SIGNED_IN,true);
                                     preferenceManager.putString(Constants.KEY_NAME, user.getName());
                                     preferenceManager.putString(Constants.KEY_IMAGE_URL, user.getImage_url());
-                                    preferenceManager.putString(Constants.KEY_USER_TYPE,user.getUserType());
-
                                     // retrieving the image and passing it to the other activity using intent
                                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                     startActivity(intent);

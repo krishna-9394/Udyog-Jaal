@@ -36,7 +36,7 @@ public class JobSeekersForm1 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         preferenceManager=new PreferenceManager(getApplicationContext());
         seekerDB = FirebaseDatabase.getInstance();
-        if(preferenceManager.getBoolean(Constants.KEY_IS_SEEKER1_DONE)){
+        if(preferenceManager.getBoolean(Constants.KEY_IS_SEEKER1_DONE) || preferenceManager.getBoolean(Constants.KEY_IS_SELECTION_DONE)){
             startActivity(new Intent(JobSeekersForm1.this, JobSeekersForm2.class));
         }
         setContentView(R.layout.activity_job_seekers_form1);

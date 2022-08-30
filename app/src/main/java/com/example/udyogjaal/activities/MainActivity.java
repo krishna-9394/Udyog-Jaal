@@ -18,7 +18,9 @@ import com.example.udyogjaal.application_form.JobSeekersForm1;
 import com.example.udyogjaal.utilities.Constants;
 import com.example.udyogjaal.utilities.PreferenceManager;
 import com.example.udyogjaal.utilities.User;
+import com.example.udyogjaal.utilities.UserType;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -38,16 +40,27 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         preferenceManager = new PreferenceManager(getApplicationContext());
         DB = FirebaseDatabase.getInstance();
+        DB.getReference("user type").child(preferenceManager.getString(Constants.KEY_USER_ID)).get()
+                .addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                    @Override
+                    public void onSuccess(DataSnapshot dataSnapshot) {
+                        UserType usertype = dataSnapshot.getValue(UserType.class);
+                        preferenceManager.putBoolean(Constants.KEY_IS_SELECTION_DONE,usertype.getSelection());
+                        if(usertype.getSeeker()) preferenceManager.putString(Constants.KEY_USER_TYPE,"seeker");
+                        else if(usertype.getProvider()) preferenceManager.putString(Constants.KEY_USER_TYPE,"provider");
+                        else preferenceManager.putString(Constants.KEY_USER_TYPE,"guest");
+                    }
+                });
         if(preferenceManager.getBoolean(Constants.KEY_IS_SELECTION_DONE)){
-            switch (preferenceManager.getString(Constants.KEY_USER_TYPE)){
+            switch(preferenceManager.getString(Constants.KEY_USER_TYPE)){
                 case "seeker":
-                    startActivity(new Intent(getApplicationContext(), JobSeekersForm1.class));
+                    startActivity(new Intent(MainActivity.this, JobSeekersForm1.class));
                     break;
                 case "provider":
-                    startActivity(new Intent(getApplicationContext(), JobProvidersForm1.class));
+                    startActivity(new Intent(MainActivity.this, JobProvidersForm1.class));
                     break;
                 default:
-                    showToast("user the user type...");
+                    showToast("select the user Type...");
             }
         }
         super.onCreate(savedInstanceState);
@@ -82,34 +95,40 @@ public class MainActivity extends AppCompatActivity {
         });
         seeker.setOnClickListener(view ->{
             preferenceManager.putString(Constants.KEY_USER_TYPE,"seeker");
-            DB.getReference("user").child(preferenceManager.getString(Constants.KEY_USER_ID))
-                            .addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    User user = snapshot.getValue(User.class);
-                                    preferenceManager.putString(Constants.KEY_USER_TYPE,"seeker");
-                                    user.setUserType(preferenceManager.getString(Constants.KEY_USER_TYPE));
-                                    update(user);
-                                    preferenceManager.putBoolean(Constants.KEY_IS_SELECTION_DONE,true);
-                                    startActivity(new Intent(getApplicationContext(), JobSeekersForm1.class));
-                                }
-
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {
-
-                                }
-                            });
-        });
-        provider.setOnClickListener(view ->{
-            preferenceManager.putString(Constants.KEY_USER_TYPE, "provider");
-            DB.getReference("user").child(preferenceManager.getString(Constants.KEY_USER_ID))
+            DB.getReference("user type").child(preferenceManager.getString(Constants.KEY_USER_ID))
                     .addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            User user = snapshot.getValue(User.class);
+                            UserType userType = snapshot.getValue(UserType.class);
+                            userType.setSelection(true);
+                            userType.setSeeker(true);
+                            userType.setProvider(true);
+                            update(userType);
+                            preferenceManager.putString(Constants.KEY_USER_TYPE,"seeker");
+                            preferenceManager.putBoolean(Constants.KEY_IS_SELECTION_DONE,true);
+                            startActivity(new Intent(getApplicationContext(), JobSeekersForm1.class));
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+        });
+
+        provider.setOnClickListener(view ->{
+            preferenceManager.putString(Constants.KEY_USER_TYPE, "provider");
+            DB.getReference("user type").child(preferenceManager.getString(Constants.KEY_USER_ID))
+                    .addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            UserType userType = snapshot.getValue(UserType.class);
+                            userType.setSelection(true);
+                            userType.setSeeker(false);
+                            userType.setProvider(true);
+                            update(userType);
                             preferenceManager.putString(Constants.KEY_USER_TYPE,"provider");
-                            user.setUserType(preferenceManager.getString(Constants.KEY_USER_TYPE));
-                            update(user);
                             preferenceManager.putBoolean(Constants.KEY_IS_SELECTION_DONE,true);
                             startActivity(new Intent(getApplicationContext(), JobProvidersForm1.class));
                         }
@@ -126,10 +145,7 @@ public class MainActivity extends AppCompatActivity {
                     .addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            User user = snapshot.getValue(User.class);
                             preferenceManager.putString(Constants.KEY_USER_TYPE,"guest");
-                            user.setUserType(preferenceManager.getString(Constants.KEY_USER_TYPE));
-                            update(user);
                             preferenceManager.putBoolean(Constants.KEY_IS_SELECTION_DONE,true);
                             showToast("currently this feature is unavailable...");
                         }
@@ -143,15 +159,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void update(User user) {
-        DB.getReference("user").child(preferenceManager.getString(Constants.KEY_USER_ID)).setValue(user)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        return;
-                    }
-                });
-        return;
+    private void update(UserType userType) {
+        DB.getReference("user type").child(preferenceManager.getString(Constants.KEY_USER_ID)).setValue(userType);
     }
-
 }

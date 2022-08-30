@@ -66,6 +66,7 @@ public class DisplayArea extends AppCompatActivity {
     private void usersListLoader() {
         root.setHasFixedSize(true);
         root.setLayoutManager(new LinearLayoutManager(this));
+        nameView.setText("Users List");
         ArrayList<SeekersProfile> arr =new ArrayList<>();
         SeekersCustomAdapter adapter = new SeekersCustomAdapter(getApplicationContext(),arr);
         root.setAdapter(adapter);
@@ -95,6 +96,7 @@ public class DisplayArea extends AppCompatActivity {
     private void vacancyLoader() {
         root.setHasFixedSize(true);
         root.setLayoutManager(new LinearLayoutManager(this));
+        nameView.setText("Vacancy List");
         ArrayList<ProvidersProfile> arr =new ArrayList<>();
         ProvidersCustomAdapter adapter = new ProvidersCustomAdapter(getApplicationContext(),arr);
         root.setAdapter(adapter);

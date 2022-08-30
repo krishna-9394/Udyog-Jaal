@@ -19,8 +19,11 @@ import com.example.udyogjaal.utilities.PreferenceManager;
 import com.example.udyogjaal.utilities.Providers;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -46,7 +49,7 @@ public class JobProvidersForm1 extends AppCompatActivity {
         preferenceManager=new PreferenceManager(getApplicationContext());
         providerDB = FirebaseDatabase.getInstance();
         super.onCreate(savedInstanceState);
-        if(preferenceManager.getBoolean(Constants.KEY_IS_PROVIDER1_DONE)){
+        if(preferenceManager.getBoolean(Constants.KEY_IS_PROVIDER1_DONE) || preferenceManager.getBoolean(Constants.KEY_IS_SELECTION_DONE)){
             startActivity(new Intent(JobProvidersForm1.this, JobProvidersForm2.class));
         }
         setContentView(R.layout.activity_job_providers_form1);

@@ -35,7 +35,7 @@ public class JobProvidersForm2 extends AppCompatActivity {
         preferenceManager=new PreferenceManager(getApplicationContext());
         providerDB = FirebaseDatabase.getInstance();
         super.onCreate(savedInstanceState);
-        if(preferenceManager.getBoolean(Constants.KEY_IS_PROVIDER2_DONE)){
+        if(preferenceManager.getBoolean(Constants.KEY_IS_PROVIDER2_DONE) || preferenceManager.getBoolean(Constants.KEY_IS_SELECTION_DONE)){
             startActivity(new Intent(JobProvidersForm2.this, DisplayArea.class));
         }
         setContentView(R.layout.activity_job_providers_form2);
