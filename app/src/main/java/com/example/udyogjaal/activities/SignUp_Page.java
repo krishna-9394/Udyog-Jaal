@@ -186,7 +186,7 @@ public class SignUp_Page extends AppCompatActivity {
     }  //function to get the file extensions
     private void SignUp() {
         loading(true);
-        User user = new User(email.getText().toString().trim(), url, name.getText().toString().trim(), password.getText().toString().trim());
+        User user = new User(email.getText().toString().trim(), url, name.getText().toString().trim(), password.getText().toString().trim(),"guest");
         DatabaseReference def = loginDB.getReference();
         String key = def.child("users").push().getKey();
         def.child("users").child(key).setValue(user)

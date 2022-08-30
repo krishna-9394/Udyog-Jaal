@@ -17,4 +17,5 @@ public class Constants {
     public static final String KEY_IS_PROVIDER2_DONE = "provider2";
     public static final String KEY_IS_SEEKER1_DONE = "seeker1";
     public static final String KEY_IS_SEEKER2_DONE = "seeker2";
+    public static final String KEY_IS_SELECTION_DONE= "isselectiondone";
 }

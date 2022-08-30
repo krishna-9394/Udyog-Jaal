@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,7 +40,7 @@ public class ProvidersCustomAdapter extends RecyclerView.Adapter<ProvidersCustom
         final ProvidersProfile provider = list.get(position);
         Log.v("messaging", ""+provider.toString());
         holder.name.setText(provider.getName());
-        holder.contact.setText(provider.getName());
+        holder.contact.setText(provider.getContact_number());
         String field = "";
         for (int i = 0; i < 7; i++) {
             if(provider.getField_status().get(i)) {
@@ -74,7 +75,7 @@ public class ProvidersCustomAdapter extends RecyclerView.Adapter<ProvidersCustom
         }
     }
     private static void phoneCall(CharSequence text) {
-
+        Toast.makeText(context, ""+text, Toast.LENGTH_SHORT).show();
         String phone = "+91"+text;
         Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null));
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

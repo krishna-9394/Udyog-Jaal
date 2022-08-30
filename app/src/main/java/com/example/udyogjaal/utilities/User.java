@@ -5,15 +5,26 @@ public class User {
     private String image_url;
     private String email;
     private String password;
+    private String userType;
     public User() {
     }
 
-    public User( String email, String image_url, String name, String password) {
+    public User( String email, String image_url, String name, String password,String userType) {
         this.name = name;
         this.image_url = image_url;
         this.email = email;
         this.password = password;
+        this.userType = userType;
     }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
+
     public String getName() {
         return name;
     }
