@@ -1,5 +1,3 @@
-README.md
-
 # Udyog Jaal - Network Of Jobs
 
 Udyog Jaal is an innovative application designed to address the lack of transparency and efficiency in the job market for skilled employees. The app aims to bridge the gap between job seekers and job providers by providing a platform where users can upload their personal information, contact details, and skill sets.
