@@ -41,10 +41,6 @@ We are currently in the testing phase of our application. The app will be distri
 
 We welcome contributions to enhance the features and usability of Udyog Jaal - Network of Jobs. If you have any suggestions, bug reports, or feature requests, please open an issue on our GitHub repository.
 
-## License
-
-This project is licensed under the [MIT License](LICENSE).
-
 ## Contact
 
 For any further information or inquiries, please contact us at krishnakumar72480@gmail.com
