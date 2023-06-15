@@ -47,4 +47,4 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Contact
 
-For any further information or inquiries, please contact us at [email protected]
+For any further information or inquiries, please contact us at krishnakumar72480@gmail.com
